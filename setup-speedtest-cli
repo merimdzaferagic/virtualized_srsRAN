@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "This script will set up the Ookla Speedtest CLI for use in the"
+echo "virtual srsUE docker container."
+echo
+read -p "Press ENTER to continue, or CTRL + C to cancel."
+echo
+echo
+docker exec -it virtual-srsue bash -c 'curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash; apt-get install speedtest'
+echo
+echo
+echo "Done!"
+echo
+

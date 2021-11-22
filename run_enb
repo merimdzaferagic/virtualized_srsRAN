@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -it virtual-srsenb stdbuf -oL srsenb /etc/srsran/enb.conf.fauxrf --pcap.enable=1 --enb.mme_addr=192.168.65.10 --enb.gtp_bind_addr=192.168.65.11 --enb.s1c_bind_addr=192.168.65.11 --enb_files.sib_config=/etc/srsran/sib.conf --rf.device_name=zmq --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://192.168.65.11:2001,id=virtual-srsenb,base_srate=23.04e6"

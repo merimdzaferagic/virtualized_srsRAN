@@ -1,0 +1,55 @@
+version: '3.8'
+
+x-srsue:
+  &ue-settings
+  build: .
+  command: stdbuf -oL srsue /etc/srsran/ue.conf.fauxrf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://192.168.65.11:2000,id=virtual-srsue,base_srate=23.04e6"
+  ipc: service:srsenb
+  cap_add:
+    - NET_ADMIN
+    - SYS_NICE
+  devices:
+    - /dev/net/tun
+  depends_on:
+    - srsenb
+
+services:
+  srsepc:
+    container_name: virtual-srsepc
+    build: .
+    command: stdbuf -oL srsepc /etc/srsran/epc.conf --mme.mme_bind_addr=192.168.65.10 --spgw.gtpu_bind_addr=192.168.65.10
+    networks:
+      corenet:
+        ipv4_address: 192.168.65.10
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    devices:
+      - /dev/net/tun
+  srsenb:
+    container_name: virtual-srsenb
+    build: .
+    command: tail -F anything
+    networks:
+      corenet:
+        ipv4_address: 192.168.65.11
+    ipc: shareable
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    devices:
+      - /dev/net/tun
+  #srsue:
+  #  << : *ue-settings
+  #  container_name: virtual-srsue
+  # srsue2:
+  #   << : *ue-settings
+  #   container_name: virtual-srsue2
+  #   command: "srsue ue.conf.fauxrf --usim.imsi=001010123456780"
+
+networks:
+  corenet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.65.0/24

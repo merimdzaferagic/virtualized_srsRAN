@@ -1,0 +1,53 @@
+#!/bin/bash
+echo "This script will set up internet access between the UE, eNB and EPC."
+echo "This assumes you haven't changed any IPs for these services."
+echo
+read -s -p "Press ENTER to continue, or CTRL + C to exit"
+
+
+echo
+echo
+echo "**** Checking connection between UE and eNB... ****"
+echo
+
+docker exec -i -t virtual-srsepc ping -c 4 172.16.0.2
+
+
+echo
+echo
+echo "**** UE currently connecting via virtualised Docker network. ****"
+echo "**** Re-routing UE connection through the EPC... ****"
+echo
+
+# Configure network address translation (NAT) at the EPC
+docker exec virtual-srsepc iptables -t nat -A POSTROUTING -s 172.16.0.0/24 -o eth0 -j MASQUERADE
+
+# Set traffic from the UE to route via the EPC
+docker exec virtual-srsue ip route replace default via 172.16.0.1
+#docker exec virtual-srsenb ip route replace default via 172.16.0.1
+#192.168.65.10
+
+
+echo
+echo
+echo "**** Testing external connection to the internet from the UE... ****"
+echo
+
+docker exec -i -t virtual-srsue ping -c 4 1.1.1.1
+
+
+echo
+echo
+echo "**** Testing DNS resolving capability from UE... ****"
+echo
+
+docker exec -i -t virtual-srsue ping -c 1 google.com
+
+
+echo
+echo
+echo "Everything looks good to go!"
+echo "To access the UE container, run the `./enterUE` script."
+echo
+read -s -p "Press ENTER to continue."
+echo
