@@ -4,6 +4,8 @@ echo "This assumes you haven't changed any IPs for these services."
 echo
 read -s -p "Press ENTER to continue, or CTRL + C to exit"
 
+#docker cp resolv.conf virtual-srsepc:/srsran/
+#docker cp resolv.conf virtual-srsran:/srsran/
 
 echo
 echo
@@ -23,9 +25,7 @@ echo
 docker exec virtual-srsepc iptables -t nat -A POSTROUTING -s 172.16.0.0/24 -o eth0 -j MASQUERADE
 
 # Set traffic from the UE to route via the EPC
-docker exec virtual-srsue ip route replace default via 172.16.0.1
-#docker exec virtual-srsenb ip route replace default via 172.16.0.1
-#192.168.65.10
+docker exec virtual-srsran ip route replace default via 172.16.0.1
 
 
 echo
@@ -33,7 +33,7 @@ echo
 echo "**** Testing external connection to the internet from the UE... ****"
 echo
 
-docker exec -i -t virtual-srsue ping -c 4 1.1.1.1
+docker exec -i -t virtual-srsran ping -c 4 1.1.1.1
 
 
 echo
@@ -41,8 +41,9 @@ echo
 echo "**** Testing DNS resolving capability from UE... ****"
 echo
 
-docker exec -i -t virtual-srsue ping -c 1 google.com
+docker exec -i -t virtual-srsran ping -c 1 google.com
 
+echo "**** Replace the /etc/resolv.conf configuration... nameserver in first line has to be 8.8.8.8 (google DNS)****"
 
 echo
 echo

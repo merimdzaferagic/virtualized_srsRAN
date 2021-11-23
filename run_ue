@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec -it virtual-srsenb stdbuf -oL srsue /etc/srsran/ue.conf.fauxrf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=virtual-srsue,base_srate=23.04e6"
+docker exec -it virtual-srsran stdbuf -oL srsue /etc/srsran/ue.conf.fauxrf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=virtual-srsue,base_srate=23.04e6"

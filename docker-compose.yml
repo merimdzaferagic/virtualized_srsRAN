@@ -1,18 +1,5 @@
 version: '3.8'
 
-x-srsue:
-  &ue-settings
-  build: .
-  command: stdbuf -oL srsue /etc/srsran/ue.conf.fauxrf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://192.168.65.11:2000,id=virtual-srsue,base_srate=23.04e6"
-  ipc: service:srsenb
-  cap_add:
-    - NET_ADMIN
-    - SYS_NICE
-  devices:
-    - /dev/net/tun
-  depends_on:
-    - srsenb
-
 services:
   srsepc:
     container_name: virtual-srsepc
@@ -26,8 +13,8 @@ services:
       - SYS_NICE
     devices:
       - /dev/net/tun
-  srsenb:
-    container_name: virtual-srsenb
+  srsran:
+    container_name: virtual-srsran
     build: .
     command: tail -F anything
     networks:
@@ -39,13 +26,6 @@ services:
       - SYS_NICE
     devices:
       - /dev/net/tun
-  #srsue:
-  #  << : *ue-settings
-  #  container_name: virtual-srsue
-  # srsue2:
-  #   << : *ue-settings
-  #   container_name: virtual-srsue2
-  #   command: "srsue ue.conf.fauxrf --usim.imsi=001010123456780"
 
 networks:
   corenet:
