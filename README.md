@@ -79,3 +79,9 @@ default ip address in the first line with `8.8.8.8`, which is google's DNS serve
 This finalizes the setup, and now you can connect to the container running the `UE` and ping google or install
 and run any service you want. If tracing is enabled in your `eNB` terminal, you will see that the traffic goes
 through the emulated network.
+
+### Shutting down the configuration
+
+To shut down the configuration you can `CTRL+C` in the terminal in which you ran `docker-compose up` and then run:
+
+    $ docker-compose down
