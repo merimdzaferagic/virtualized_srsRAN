@@ -26,7 +26,7 @@ Once the connection between the `eNB` and the `EPC` is established, you will see
     $ ==== eNodeB started ===
     $ Type <t> to view trace
 
-By pressing `t` you can start the trace on the `eNB `. In a separate terminal you should run the `UE` by executing the following command:
+By pressing `t` you can start the trace on the `eNB`. In a separate terminal you should run the `UE` by executing the following command:
 
     $ ./run_ue
 
@@ -34,10 +34,11 @@ This will spin up the UE and connect it to the `eNB` and `EPC`. This will take s
 
     $ ./enterRAN
 
-Once the connection between the `UE` and the `EPC` is established, you will be able to see a new network interface (i.e. ) by running the following command:
+Once the connection between the `UE` and the `EPC` is established, you will be able to see a new network interface (i.e. `tun_srsue`) by running the following command:
 
     $ ifconfig
 
+In the terminal in which you executed the `./run_ue` command, you can type `t` to start a trace for the `UE` as well.
 Now, you are already able to ping the `UE` from the `EPC`. To do that, you can open another terminal and enter the `EPC` container by running the following command:
 
     $ ./enterEPC
