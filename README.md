@@ -15,42 +15,42 @@ The architecture is shown in the figure below:
 
 Clone the repository, and run the following command to spin up the Docker containers:
 
-    $ docker-compose up
+    docker-compose up
 
 If you are running the command above for the first time, it will take a couple of minutes to build the containers and compile all the libraries.
 Once the build is finished, you will have two containers running. You can verify that by running the following command:
 
-    $ docker ps
+    docker ps
 
 The next step is to spin up the `eNB` by running the following command in a separate terminal:
 
-    $ ./run_enb
+    ./run_enb
 
 Once the connection between the `eNB` and the `EPC` is established, you will see the following text in the terminal:
 
-    $ ==== eNodeB started ===
-    $ Type <t> to view trace
+    ==== eNodeB started ===
+    Type <t> to view trace
 
 By pressing `t` you can start the trace on the `eNB`. In a separate terminal you should run the `UE` by executing the following command:
 
-    $ ./run_ue
+    ./run_ue
 
 This will spin up the UE and connect it to the `eNB` and `EPC`. This will take some time. In the meantime, you can enter the `srsRAN` container by executing the following cammand:
 
-    $ ./enterRAN
+    ./enterRAN
 
 Once the connection between the `UE` and the `EPC` is established, you will be able to see a new network interface (i.e. `tun_srsue`) by running the following command:
 
-    $ ifconfig
+    ifconfig
 
 In the terminal in which you executed the `./run_ue` command, you can type `t` to start a trace for the `UE` as well.
 Now, you are already able to ping the `UE` from the `EPC`. To do that, you can open another terminal and enter the `EPC` container by running the following command:
 
-    $ ./enterEPC
+    ./enterEPC
 
 The `ifconfig` command showed us the ip address of the `UE`, which is by default `172.16.0.2` (if you have not changed it you can ping this address):
 
-    $ ping 172.16.0.2
+    ping 172.16.0.2
 
 ### Change config files
 
@@ -90,4 +90,4 @@ through the emulated network.
 
 To shut down the configuration you can `CTRL+C` in the terminal in which you ran `docker-compose up` and then run:
 
-    $ docker-compose down
+    docker-compose down
