@@ -1,12 +1,12 @@
-# srsran-docker-emulated
+# srsRAN in docker containers
 
 > This based on the repo created by [pgorczak](https://github.com/pgorczak),
-> updated to use the latest version of srsLTE, since renamed to srsRAN.
 
-This is a minimal example of an end-to-end [srsRAN] system running with Docker
-and shared memory. Core network, base station and user device all run in
-separate containers. The air interface is emulated via radio samples in shared
-memory.
+This setup allows you to run:
+- srsEPC in one container
+- srsENB and srsUE in one container (they are sharing one container because we rely on virtual radios using the ZeroMQ networking library to transfer radio samples)
+
+
 
 ### Usage
 

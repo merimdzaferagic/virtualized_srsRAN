@@ -20,6 +20,7 @@ services:
     networks:
       corenet:
         ipv4_address: 192.168.65.11
+    #ipc: shareable
     cap_add:
       - NET_ADMIN
       - SYS_NICE

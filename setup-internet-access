@@ -4,9 +4,6 @@ echo "This assumes you haven't changed any IPs for these services."
 echo
 read -s -p "Press ENTER to continue, or CTRL + C to exit"
 
-#docker cp resolv.conf virtual-srsepc:/srsran/
-#docker cp resolv.conf virtual-srsran:/srsran/
-
 echo
 echo
 echo "**** Checking connection between UE and eNB... ****"
@@ -48,7 +45,6 @@ echo "**** Replace the /etc/resolv.conf configuration... nameserver in first lin
 echo
 echo
 echo "Everything looks good to go!"
-echo "To access the UE container, run the `./enterUE` script."
 echo
 read -s -p "Press ENTER to continue."
 echo
