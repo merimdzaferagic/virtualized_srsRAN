@@ -7,7 +7,7 @@ This setup allows you to run:
 - srsENB and srsUE in one container (they are sharing one container, which makes it easier to configure with the ZeroMQ networking library to transfer radio samples)
 
 The architecture is shown in the figure below:
-![Architecture](https://github.com/merimdzaferagic/virtualized_srsRAN/blob/master/overview.jpg?raw=true)
+![Architecture](https://github.com/merimdzaferagic/virtualized_srsRAN/blob/master/figures/overview.jpg?raw=true)
 
 
 
