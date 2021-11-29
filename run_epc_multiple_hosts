@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run --device=/dev/net/tun --cap-add=NET_ADMIN -it --name epc --network corenet --ip=192.168.65.10 epc stdbuf -oL srsepc /etc/srsran/epc.conf --mme.mme_bind_addr=192.168.65.10 --spgw.gtpu_bind_addr=192.168.65.10
+docker run --device=/dev/net/tun --cap-add=NET_ADMIN -it --name virtual-srsepc --network corenet --ip=192.168.65.10 epc stdbuf -oL srsepc /etc/srsran/epc.conf --mme.mme_bind_addr=192.168.65.10 --spgw.gtpu_bind_addr=192.168.65.10
