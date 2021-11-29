@@ -104,16 +104,16 @@ running on the host that runs the `EPC`). After running the script, follow the i
 that will be running the `eNB` and `UE`) to the swarm. This script will also create an `overlay` network for the containers 
 to communicate: 
 
-    `./setup_epc_multiple_hosts`
+    ./setup_epc_multiple_hosts
 
 Once the script finishes, we run the `run_epc_multiple_hosts` script. This script starts the `EPC`. Now, we can ssh into the 
 other host (the one that will run the `eNB` and `UE`). There we run first build the image: 
 
-    `docker build -t virtualized-srsran .`
+    docker build -t virtualized-srsran .
 
 One the execution of the command above finishes, we can spin up the `eNB` by running the `run_enb_multiple_hosts` script: 
 
-    `./run_enb_multiple_hosts`
+    ./run_enb_multiple_hosts
 
 Now, we have the `eNB` connected to the `EPC` and we can run the `UE` the same way we did it when everything was running on one host. 
 Everything else is exactly the same as it was when the whole setup was running on one host.
