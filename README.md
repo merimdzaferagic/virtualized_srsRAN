@@ -106,8 +106,11 @@ to communicate:
 
     ./setup_epc_multiple_hosts
 
-Once the script finishes, we run the `run_epc_multiple_hosts` script. This script starts the `EPC`. Now, we can ssh into the 
-other host (the one that will run the `eNB` and `UE`). There we run first build the image: 
+Once the script finishes, we run the `run_epc_multiple_hosts` script. This script starts the `EPC`. 
+
+    ./run_epc_multiple_hosts
+
+Now, we can ssh into the other host (the one that will run the `eNB` and `UE`). There we run first build the image: 
 
     docker build -t virtualized-srsran .
 
