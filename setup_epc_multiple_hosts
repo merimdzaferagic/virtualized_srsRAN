@@ -1,0 +1,24 @@
+#!/bin/bash
+echo "This script will set up the epc to work on one host and enable the eNB to connect to it. "
+echo
+read -s -p "Press ENTER to continue, or CTRL + C to exit"
+
+echo
+echo
+echo "**** Build Dockerfile... ****"
+echo
+echo
+docker build -t epc .
+
+echo
+echo "**** Creating docker swarm... ****"
+echo
+docker swarm init
+
+echo "**** swarm created attach nodes to it (copy the attach command to the host running node members of the swarm)... ****"
+read -s -p "Press ENTER to continue, or CTRL + C to exit"
+
+echo
+echo "**** Creating overlay network (corenet)... ****"
+echo
+docker network create --driver=overlay --attachable corenet --subnet=192.168.65.0/24
