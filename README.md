@@ -91,3 +91,29 @@ through the emulated network.
 To shut down the configuration you can `CTRL+C` in the terminal in which you ran `docker-compose up` and then run:
 
     docker-compose down
+    
+## Setting the containers up to work with multiple hosts 
+
+There are multiple scripts available to set this up: 
+1. `setup_epc_multiple_hosts`
+2. `run_epc_multiple_hosts`
+3. `run_enb_multiple_hosts`
+
+The `setup_epc_multiple_hosts` script first builds the existing docker file and then initializes a swarm (swarm manager 
+running on the host that runs the `EPC`). After running the script, follow the instructions to add the other host (the one 
+that will be running the `eNB` and `UE`) to the swarm. This script will also create an `overlay` network for the containers 
+to communicate: 
+
+    `./setup_epc_multiple_hosts`
+
+Once the script finishes, we run the `run_epc_multiple_hosts` script. This script starts the `EPC`. Now, we can ssh into the 
+other host (the one that will run the `eNB` and `UE`). There we run first build the image: 
+
+    `docker build -t virtualized-srsran .`
+
+One the execution of the command above finishes, we can spin up the `eNB` by running the `run_enb_multiple_hosts` script: 
+
+    `./run_enb_multiple_hosts`
+
+Now, we have the `eNB` connected to the `EPC` and we can run the `UE` the same way we did it when everything was running on one host. 
+Everything else is exactly the same as it was when the whole setup was running on one host.
