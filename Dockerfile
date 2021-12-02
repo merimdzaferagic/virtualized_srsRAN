@@ -4,7 +4,7 @@ FROM ubuntu:focal as base
 # We need uhd so enb and ue are built
 # Use curl and unzip to get a specific commit state from github
 # Also install ping to test connections
-RUN apt update
+RUN apt-get update
 
 RUN DEBIAN_FRONTEND=noninteractive apt install -y \
      build-essential \
@@ -64,5 +64,8 @@ RUN srsran_install_configs.sh service
 
 # Update dynamic linker
 RUN ldconfig
+
+RUN apt-get update
+RUN apt-get install -y gnuradio
 
 WORKDIR /srsran
