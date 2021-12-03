@@ -1,0 +1,5 @@
+#!/bin/bash
+docker cp ./enb.conf virtual-srsran:/etc/srsran/
+docker cp ./rr.conf virtual-srsran:/etc/srsran/
+docker cp ./ue.conf virtual-srsran:/etc/srsran/
+docker cp ./intra_enb.py virtual-srsran:/srsran/
