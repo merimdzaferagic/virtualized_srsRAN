@@ -48,12 +48,12 @@ RUN ldconfig
 WORKDIR /srsran
 
 # Pinned git commit used for this example
-ARG COMMIT=48cfe041f06942bb32213a126f7706a46a676713
+# ARG COMMIT=48cfe041f06942bb32213a126f7706a46a676713
 
 # Download and build
 RUN git clone https://github.com/srsRAN/srsRAN.git ./
-RUN git fetch origin ${COMMIT}
-RUN git checkout ${COMMIT}
+#RUN git fetch origin ${COMMIT}
+#RUN git checkout ${COMMIT}
 
 WORKDIR /srsran/build
 
