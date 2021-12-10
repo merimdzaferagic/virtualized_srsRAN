@@ -23,9 +23,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt install -y \
      net-tools \
      tcpdump \
      vim \
-     libtool
+     libtool \
+     librdkafka-dev \
+     wget \
+     openjdk-8-jre
 
 RUN rm -rf /var/lib/apt/lists/*
+
+# install kafka
+RUN wget https://archive.apache.org/dist/kafka/1.1.0/kafka_2.11-1.1.0.tgz
+RUN tar -xzf kafka_2.11-1.1.0.tgz
 
 WORKDIR /zmq
 
