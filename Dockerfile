@@ -64,9 +64,12 @@ RUN git clone https://github.com/srsRAN/srsRAN.git ./
 
 WORKDIR /srsran/build
 
-RUN cmake -j$(nproc) ../
-RUN make -j$(nproc)
-RUN make -j$(nproc) install
+#RUN cmake -j$(nproc) ../
+#RUN make -j$(nproc)
+#RUN make -j$(nproc) install
+RUN cmake ../
+RUN make
+RUN make install
 RUN srsran_install_configs.sh service
 
 # Update dynamic linker
